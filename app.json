@@ -1,8 +1,13 @@
 {
   "expo": {
     "name": "Sahayak",
-    "slug": "Sahayak",
+    "slug": "sahayak",
     "version": "1.0.0",
+    "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-google-signin/google-signin"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,13 +20,21 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ankitiitgn.Sahayak"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "95f9eee9-e12a-49ce-9a1a-fec0a95e1e1d"
+      }
+    },
+    "owner": "ankitiitgn"
   }
 }

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "322687737496",
+    "project_id": "sahayak-be5b3",
+    "storage_bucket": "sahayak-be5b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322687737496:android:53ad02a810ef86b24bbaed",
+        "android_client_info": {
+          "package_name": "com.ankitiitgn.Sahayak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322687737496-pmtu4rrian6455fs6po73lah0d6jf4oh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ankitiitgn.Sahayak",
+            "certificate_hash": "ba81b67b1a5fed38cc38580f19cd7192df6adf01"
+          }
+        },
+        {
+          "client_id": "322687737496-v197knpvjei58nss45bgfh8ip81nc3ud.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ankitiitgn.Sahayak",
+            "certificate_hash": "5034d3f39cfc2b58c0f722d4d3d3e9b811a23a9a"
+          }
+        },
+        {
+          "client_id": "322687737496-67sq6o16segenbfmufm4ljud0fd7j3q8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlofOfqOO5nIb9BtZu-g409HDHJ5L2NvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322687737496-67sq6o16segenbfmufm4ljud0fd7j3q8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
