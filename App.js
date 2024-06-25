@@ -9,6 +9,12 @@ import Details from "./Screens/Details";
 import Otp from "./Screens/Otp";
 import HomePage from "./Screens/HomePage";
 import OnboardingScreen from "./Screens/OnboardingScreen";
+import Campaign from "./Screens/Campaign";
+import Footer from "./Screens/Footer";
+import Profile from "./Screens/Profile";
+import Withdraw from "./Screens/Withdraw";
+import CampaignThankYou from "./Screens/CampaignThankYou";
+import CampaignMain from "./Screens/CampaignMain";
 
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +39,12 @@ export const AboutStack = () => {
       <Stack.Screen name="Otp" component={Otp} options={{headerShown: false}}/>
       <Stack.Screen name="HomePage" component={HomePage} options={{headerShown: false}}/>
       <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Campaign" component={Campaign} options={{headerShown: false}}/>
+      <Stack.Screen name="Footer" component={Footer} options={{headerShown: false}}/>
+      <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}}/>
+      <Stack.Screen name="Withdraw" component={Withdraw} options={{headerShown: false}}/>
+      <Stack.Screen name="CampaignThankYou" component={CampaignThankYou} options={{headerShown: false}}/>
+      <Stack.Screen name="CampaignMain" component={CampaignMain} options={{headerShown: false}}/>
       
     </Stack.Navigator>
   );
