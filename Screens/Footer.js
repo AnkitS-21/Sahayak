@@ -5,22 +5,23 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 const Footer = () => {
   const route = useRoute();
   const navigation = useNavigation();
+  const { userName, userEmail } = route.params;
 
   return (
     <View style={styles.footer}>
-      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('HomePage')}>
+      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('HomePage', { userName, userEmail })}>
         <Image source={require('../assets/HomeIcon.png')} style={styles.footerButtonIcon} />
         <Text style={styles.footerButtonText}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('CampaignMain')}>
+      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('CampaignMain', { userName, userEmail })}>
         <Image source={require('../assets/Campaign.png')} style={styles.footerButtonIcon} />
         <Text style={styles.footerButtonText}>Campaign</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Withdraw')}>
+      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Withdraw', { userName, userEmail })}>
         <Image source={require('../assets/withdraw.png')} style={styles.footerButtonIcon} />
         <Text style={styles.footerButtonText}>Withdraw</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Profile')}>
+      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Profile', { userName, userEmail })}>
         <Image source={require('../assets/user.png')} style={styles.footerButtonIcon} />
         <Text style={styles.footerButtonText}>Profile</Text>
       </TouchableOpacity>

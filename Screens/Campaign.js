@@ -3,16 +3,23 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image 
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import CheckBox from 'react-native-check-box';
 import Footer from './Footer';
+import firestore from '@react-native-firebase/firestore';
 
 class Campaign extends Component {
   state = {
     reason: '',
-    name: '',
+    yourName: '',
     mobile: '',
     whatsappUpdates: false,
     admitted: false,
     notAdmitted: false,
     underHomeTreatment: false,
+    raisingFundFor: '',
+    patientName: '',
+    patientAge: '',
+    patientAddress: '',
+    diseaseName: '',
+    requiredAmount: '',
   };
 
   onNextStep = () => {
@@ -22,20 +29,46 @@ class Campaign extends Component {
   onPrevStep = () => {
     console.log('called previous step');
   };
-
+  
   onSubmitSteps = () => {
     console.log('called on submit step.');
-    this.props.navigation.navigate('CampaignThankYou');
+    this.storeDataToFirestore();
+    const { name, email } = this.state;
+    this.props.navigation.navigate('CampaignThankYou', { userName: name, userEmail: email });
+  };
+
+  storeDataToFirestore = async () => {
+    try {
+      await firestore().collection('Campaigns').add({
+        reason: this.state.reason,
+        yourName: this.state.yourName,
+        mobile: this.state.mobile,
+        whatsappUpdates: this.state.whatsappUpdates,
+        admitted: this.state.admitted,
+        notAdmitted: this.state.notAdmitted,
+        underHomeTreatment: this.state.underHomeTreatment,
+        raisingFundFor: this.state.raisingFundFor,
+        patientName: this.state.patientName,
+        patientAge: this.state.patientAge,
+        patientAddress: this.state.patientAddress,
+        diseaseName: this.state.diseaseName,
+        requiredAmount: this.state.requiredAmount,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+      });
+      console.log('Data added to Firestore!');
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
   };
 
   render() {
     const progressStepsStyle = {
-      activeStepIconBorderColor: '#FFDF39',
-      activeLabelColor: '#FFDF39',
+      activeStepIconBorderColor: '#1BBF00',
+      activeLabelColor: '#1BBF00',
       activeStepNumColor: '#003198',
-      activeStepIconColor: '#FFDF39',
-      completedStepIconColor: '#FFDF39',
-      completedProgressBarColor: '#FFDF39',
+      activeStepIconColor: '#1BBF00',
+      completedStepIconColor: '#1BBF00',
+      completedProgressBarColor: '#1BBF00',
       completedCheckColor: '#003198',
     };
 
@@ -66,8 +99,8 @@ class Campaign extends Component {
                 <TextInput
                   style={styles.input}
                   placeholder="Enter Your Name"
-                  value={this.state.name}
-                  onChangeText={(text) => this.setState({ name: text })}
+                  value={this.state.yourName}
+                  onChangeText={(text) => this.setState({ yourName: text })}
                 />
                 <Text style={styles.subtitle}>Enter Your Mobile No.</Text>
                 <TextInput
@@ -99,33 +132,26 @@ class Campaign extends Component {
             >
               <View style={styles.stepContainer}>
                 <Text style={styles.stepTitle}>Patient Details</Text>
-                <Text style={styles.subtitle}>I am raising funds for</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Choose Your Reason"
-                  value={this.state.reason}
-                  onChangeText={(text) => this.setState({ reason: text })}
-                />
                 <Text style={styles.subtitle}>Enter Patient Name</Text>
                 <TextInput
                   style={styles.input}
-                  placeholder="Enter Your Name"
-                  value={this.state.name}
-                  onChangeText={(text) => this.setState({ name: text })}
+                  placeholder="Enter Patient Name"
+                  value={this.state.patientName}
+                  onChangeText={(text) => this.setState({ patientName: text })}
                 />
                 <Text style={styles.subtitle}>Patient Age</Text>
                 <TextInput
                   style={styles.input}
                   placeholder="48"
-                  value={this.state.mobile}
-                  onChangeText={(text) => this.setState({ mobile: text })}
+                  value={this.state.patientAge}
+                  onChangeText={(text) => this.setState({ patientAge: text })}
                 />
                 <Text style={styles.subtitle}>Patient Address</Text>
                 <TextInput
                   style={styles.input}
                   placeholder="Patrika Nagar, Hyderabad, Telengana"
-                  value={this.state.mobile}
-                  onChangeText={(text) => this.setState({ mobile: text })}
+                  value={this.state.patientAddress}
+                  onChangeText={(text) => this.setState({ patientAddress: text })}
                 />
               </View>
             </ProgressStep>
@@ -142,15 +168,15 @@ class Campaign extends Component {
                 <TextInput
                   style={styles.input}
                   placeholder="Disease name here"
-                  value={this.state.reason}
-                  onChangeText={(text) => this.setState({ reason: text })}
+                  value={this.state.diseaseName}
+                  onChangeText={(text) => this.setState({ diseaseName: text })}
                 />
                 <Text style={styles.subtitle}>Enter Required Amount</Text>
                 <TextInput
                   style={styles.input}
                   placeholder="Rs.0.00"
-                  value={this.state.name}
-                  onChangeText={(text) => this.setState({ name: text })}
+                  value={this.state.requiredAmount}
+                  onChangeText={(text) => this.setState({ requiredAmount: text })}
                 />
                 <Text style={styles.subtitle}>Patient’s Current Situation</Text>
                 <View style={styles.checkboxContainer}>

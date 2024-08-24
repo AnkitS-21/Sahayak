@@ -1,8 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import Footer from './Footer';
 
-const CampaignMain = ({ navigation }) => {
+const CampaignMain = () => {
+  const route = useRoute();
+  const navigation = useNavigation();
+  const { userName, userEmail } = route.params;
+  const { width, height } = Dimensions.get('window');
   return (
     <View style={styles.container}>
       <Image source={require('../assets/doc_and_patient.png')} style={styles.image} />
@@ -16,7 +21,7 @@ const CampaignMain = ({ navigation }) => {
             Start raising Fund for your chosen cause now!!
         </Text>
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Campaign')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Campaign', { userName, userEmail })}>
           <Text style={styles.buttonText}>Start A Fundraiser</Text>
         </TouchableOpacity>
       </View>

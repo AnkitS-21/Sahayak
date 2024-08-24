@@ -1,15 +1,18 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import Footer from './Footer';
 
 const CampaignThankYou = ({ navigation }) => {
+  const route = useRoute();
+  const { userName, userEmail } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={require('../assets/thank_you.png')} style={styles.headerImage} />
         <Text style={styles.thankyou}> Thank You !</Text>
         <Text style={styles.headerText}>
-          Dear <Text style={styles.userName}>Rinku Patel</Text>, your fundraiser has just been started
+          Dear <Text style={styles.userName}>{userName}</Text>, your fundraiser has just been started
         </Text>
       </View>
 
@@ -135,7 +138,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   goToDashboardButton: {
-    backgroundColor: '#FFDF39',
+    backgroundColor: '#3B5998',
     padding: 10,
     borderRadius: 10,
     flex: 1,

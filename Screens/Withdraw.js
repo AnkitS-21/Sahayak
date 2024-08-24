@@ -1,8 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import Footer from './Footer';
 
 const Withdraw = ({ navigation }) => {
+  const route = useRoute();
+  const { userName, userEmail } = route.params;
+
   return (
     <View style={styles.container}>
       <Image source={require('../assets/doctor_image.png')} style={styles.image} />
@@ -13,7 +17,7 @@ const Withdraw = ({ navigation }) => {
           With a few simple steps, withdraw the raised amount at any point in your fundraising journey
         </Text>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Campaign', { userName, userEmail })}>
           <Text style={styles.buttonText}>Start A Fundraiser</Text>
         </TouchableOpacity>
       </View>

@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import Footer from './Footer';  // Import the Footer component
+import Footer from './Footer';
 
 const HomePage = ({ navigation }) => {
   const route = useRoute();
-  const { userName } = route.params;
+  const { userName, userEmail } = route.params;
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const categories = [
@@ -34,7 +34,7 @@ const HomePage = ({ navigation }) => {
           <View style={{ height: 20 }} />
           <Text style={styles.title}>Need Funds For Your Medical Treatment?</Text>
           <Text style={styles.subtitle}>Don't worry you have come to the right platform</Text>
-          <TouchableOpacity style={styles.buttonHeader}>
+          <TouchableOpacity style={styles.buttonHeader} onPress={() => navigation.navigate('CampaignMain', { userName, userEmail })}>
             <Text style={styles.buttonHeaderText}>Start Your Fundraiser →</Text>
           </TouchableOpacity>
         </View>

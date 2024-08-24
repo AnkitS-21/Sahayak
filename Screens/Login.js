@@ -29,7 +29,7 @@ const Login = () => {
       await auth().signInWithCredential(googleCredential);
 
       // After successful sign-in, navigate to the Homepage
-      navigation.navigate('HomePage', { userName: userInfo.user.name });
+      navigation.navigate('HomePage', { userName: userInfo.user.name, userEmail: userInfo.user.email });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log("User cancelled the login flow");
