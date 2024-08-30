@@ -1,15 +1,18 @@
-To run this project, ensure you have Node.js installed on your PC. Follow the steps below to get started:
-Steps to Setup
-Install Project Dependencies:
-Open your terminal, navigate to the project directory, and run: npm install
-Install Expo Go App:
-Download and install the Expo Go app from the Play Store on your mobile device.
-Start the Project:
-In your terminal, within the project directory, run: npx expo start
-Run the App:
-Scan the QR code displayed in the terminal or Expo DevTools using the Expo Go app on your mobile device.
+# Fundraising App
 
-All set! You are now ready to work on this project.
+Welcome to the Fundraising App! This project helps users create and manage fundraising campaigns for medical treatments. Follow the instructions below to set up and run the project on your local machine.
+
+## Getting Started
+
+To run this project, you'll need to have Node.js installed on your PC. Follow the steps below to get started:
+
+### Steps to Setup
+
+1. **Install Project Dependencies**
+
+   Open your terminal, navigate to the project directory, and run:
+   ```bash
+   npm install
 
 
 Below are some example how interface look like:
