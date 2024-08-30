@@ -1,38 +1,46 @@
-Install Expo Go App
+# Fundraising App
 
-Download and install the Expo Go app from the Play Store on your mobile device.
+Welcome to the Fundraising App! This project helps users create and manage fundraising campaigns for medical treatments. Follow the instructions below to set up and run the project on your local machine.
 
-Start the Project
+## Getting Started
 
-In your terminal, within the project directory, run:
+To run this project, you'll need to have Node.js installed on your PC. Follow the steps below to get started:
 
-bash
-Copy code
-npx expo start
-Run the App
+### Steps to Setup
 
-Scan the QR code displayed in the terminal or Expo DevTools using the Expo Go app on your mobile device.
+1. **Install Project Dependencies**
 
-Project Structure
-HomePage.js: Main page displaying categories, stories, and user interactions.
-Footer.js: Component for the footer section.
-Screenshots
-Below are some examples of how the interface looks:
-
-
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Contributing
-Feel free to contribute to this project by submitting pull requests or opening issues.
-
-Contact
-For any questions or feedback, please contact us at your-email@example.com.
+   Open your terminal, navigate to the project directory, and run:
+   ```bash
    npm install
 
+2. **Install Expo Go Ap**
+   Download and install the Expo Go app from the Play Store on your mobile device.
 
-Below are some example how interface look like:
+3. **EAS Build**
+
+   Open your terminal, navigate to the project directory, and run:
+   ```bash
+   npm install -g eas-cli
+
+4. **Log in to your Expo account**
+   ```bash
+   eas login
+
+5. **Run a build**
+   ```bash
+   eas build --platform android
+
+
+All set! You are now ready to work on this project.
+
+Feel free to contribute to this project by submitting pull requests or opening issues.
+
+**Contact**
+For any questions or feedback, please contact us at your-singh.ankit@iitgn.ac.in.
+
+
+Below are some example how interfaces looks:
 ![WhatsApp Image 2024-08-31 at 03 49 06_06cec7fa](https://github.com/user-attachments/assets/00a8a362-c5c1-434e-b2f4-81b3543f1995)
 ![WhatsApp Image 2024-08-31 at 03 49 06_41864b27](https://github.com/user-attachments/assets/a04e8160-40d4-434a-8fce-ed474fe33eb2)
 ![WhatsApp Image 2024-08-31 at 03 49 06_6d4b92f7](https://github.com/user-attachments/assets/58d1dd36-c409-4418-8915-d4d8fbdf88a9)
