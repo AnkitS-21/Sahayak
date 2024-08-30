@@ -1,17 +1,34 @@
-# Fundraising App
+Install Expo Go App
 
-Welcome to the Fundraising App! This project helps users create and manage fundraising campaigns for medical treatments. Follow the instructions below to set up and run the project on your local machine.
+Download and install the Expo Go app from the Play Store on your mobile device.
 
-## Getting Started
+Start the Project
 
-To run this project, you'll need to have Node.js installed on your PC. Follow the steps below to get started:
+In your terminal, within the project directory, run:
 
-### Steps to Setup
+bash
+Copy code
+npx expo start
+Run the App
 
-1. **Install Project Dependencies**
+Scan the QR code displayed in the terminal or Expo DevTools using the Expo Go app on your mobile device.
 
-   Open your terminal, navigate to the project directory, and run:
-   ```bash
+Project Structure
+HomePage.js: Main page displaying categories, stories, and user interactions.
+Footer.js: Component for the footer section.
+Screenshots
+Below are some examples of how the interface looks:
+
+
+
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Contributing
+Feel free to contribute to this project by submitting pull requests or opening issues.
+
+Contact
+For any questions or feedback, please contact us at your-email@example.com.
    npm install
 
 
