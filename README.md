@@ -37,7 +37,7 @@ All set! You are now ready to work on this project.
 Feel free to contribute to this project by submitting pull requests or opening issues.
 
 **Contact**
-For any questions or feedback, please contact us at your-singh.ankit@iitgn.ac.in.
+For any questions or feedback, please contact us at singh.ankit@iitgn.ac.in.
 
 
 Below are some example how interfaces looks:
