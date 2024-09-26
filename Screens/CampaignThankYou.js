@@ -1,11 +1,54 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions, Share, Alert } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import Footer from './Footer';
 
 const CampaignThankYou = ({ navigation }) => {
   const route = useRoute();
-  const { userName, userEmail } = route.params;
+  const { userName, userEmail, patientName, diseaseName, requiredAmount, donationLink } = route.params; // Destructure the required data
+
+  // Function to handle WhatsApp sharing
+  const shareToWhatsApp = async () => {
+    try {
+      const result = await Share.share({
+        message: `Please support ${patientName} in fighting against ${diseaseName}. We are raising Rs.${requiredAmount} for their treatment. Your small help can make a big difference. Donation Link: ${donationLink} #Support${patientName}`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log('Shared with activity type:', result.activityType);
+        } else {
+          console.log('Shared successfully!');
+        }
+      } else if (result.action === Share.dismissedAction) {
+        console.log('Share dismissed');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'There was an error sharing the campaign. Please try again.');
+      console.error(error);
+    }
+  };
+
+  // Function to handle Facebook sharing
+  const shareToFacebook = async () => {
+    try {
+      const result = await Share.share({
+        message: `Please support ${patientName} in fighting against ${diseaseName}. We are raising Rs.${requiredAmount} for their treatment. Your small help can make a big difference. #Support${patientName}`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log('Shared with activity type:', result.activityType);
+        } else {
+          console.log('Shared successfully!');
+        }
+      } else if (result.action === Share.dismissedAction) {
+        console.log('Share dismissed');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'There was an error sharing the campaign. Please try again.');
+      console.error(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -17,10 +60,8 @@ const CampaignThankYou = ({ navigation }) => {
       </View>
 
       <View style={styles.content}>
-        
-        
         <View style={styles.uploadSection}>
-            <Text style={styles.title}>Help Rinku Patel to fight with NICU Care</Text>
+          <Text style={styles.title}>Help {patientName} to fight with {diseaseName}</Text>
           <TouchableOpacity style={styles.uploadButton}>
             <Image source={require('../assets/uploadfile.png')} style={styles.uploadIcon} />
             <Text style={styles.uploadText}>Upload</Text>
@@ -41,10 +82,10 @@ const CampaignThankYou = ({ navigation }) => {
           and help reach the goal faster.
         </Text>
 
-        <TouchableOpacity style={styles.shareWhatsAppButton}>
+        <TouchableOpacity style={styles.shareWhatsAppButton} onPress={shareToWhatsApp}>
           <Text style={styles.shareButtonText}>Share On What's app</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.shareFacebookButton}>
+        <TouchableOpacity style={styles.shareFacebookButton} onPress={shareToFacebook}>
           <Text style={styles.shareButtonText}>Share On Facebook</Text>
         </TouchableOpacity>
       </View>

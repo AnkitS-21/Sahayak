@@ -30,12 +30,50 @@ class Campaign extends Component {
     console.log('called previous step');
   };
   
-  onSubmitSteps = () => {
+  onSubmitSteps = async () => {
     console.log('called on submit step.');
-    this.storeDataToFirestore();
-    const { name, email } = this.state;
-    this.props.navigation.navigate('CampaignThankYou', { userName: name, userEmail: email });
+    const { yourName, patientName, diseaseName, requiredAmount, patientAddress, mobile } = this.state;
+  
+    try {
+      // Store data in Firestore and get the document reference
+      const campaignRef = await firestore().collection('Campaigns').add({
+        reason: this.state.reason,
+        yourName: this.state.yourName,
+        mobile: this.state.mobile,
+        whatsappUpdates: this.state.whatsappUpdates,
+        admitted: this.state.admitted,
+        notAdmitted: this.state.notAdmitted,
+        underHomeTreatment: this.state.underHomeTreatment,
+        raisingFundFor: this.state.raisingFundFor,
+        patientName: this.state.patientName,
+        patientAge: this.state.patientAge,
+        patientAddress: this.state.patientAddress,
+        diseaseName: this.state.diseaseName,
+        requiredAmount: this.state.requiredAmount,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+      });
+  
+      console.log('Data added to Firestore!', campaignRef.id);
+  
+      // Generate the donation link with query parameters
+      const donationLink = `https://ankits-21.github.io/donation-page/donate.html?yourName=${encodeURIComponent(yourName)}&patientName=${encodeURIComponent(patientName)}&diseaseName=${encodeURIComponent(diseaseName)}&requiredAmount=${encodeURIComponent(requiredAmount)}&patientAddress=${encodeURIComponent(patientAddress)}&mobile=${encodeURIComponent(mobile)}`
+;
+  
+      // Navigate to the thank you page with the donation link
+      this.props.navigation.navigate('CampaignThankYou', {
+        userName: yourName,
+        patientName,
+        diseaseName,
+        requiredAmount,
+        donationLink,
+      });
+  
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
   };
+  
+  
 
   storeDataToFirestore = async () => {
     try {
@@ -106,8 +144,13 @@ class Campaign extends Component {
                 <TextInput
                   style={styles.input}
                   placeholder="+91-7894387297"
+                  keyboardType="numeric"
                   value={this.state.mobile}
-                  onChangeText={(text) => this.setState({ mobile: text })}
+                  onChangeText={(text) => {
+                    // Filter out non-numeric characters and limit to 10 digits
+                    const numericText = text.replace(/[^0-9]/g, '').slice(0, 10);
+                    this.setState({ mobile: numericText });
+                  }}
                 />
                 <View style={styles.checkboxContainer}>
                   <CheckBox
@@ -143,6 +186,7 @@ class Campaign extends Component {
                 <TextInput
                   style={styles.input}
                   placeholder="48"
+                  keyboardType="numeric"
                   value={this.state.patientAge}
                   onChangeText={(text) => this.setState({ patientAge: text })}
                 />
@@ -156,67 +200,71 @@ class Campaign extends Component {
               </View>
             </ProgressStep>
             <ProgressStep
-              label="3"
-              onNext={this.onNextStep}
-              scrollViewProps={this.defaultScrollViewProps}
-              nextBtnTextStyle={styles.buttonText}
-              nextBtnStyle={styles.button}
-            >
-              <View style={styles.stepContainer}>
-                <Text style={styles.stepTitle}>Treatment Details</Text>
-                <Text style={styles.subtitle}>Enter Disease Name</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Disease name here"
-                  value={this.state.diseaseName}
-                  onChangeText={(text) => this.setState({ diseaseName: text })}
-                />
-                <Text style={styles.subtitle}>Enter Required Amount</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Rs.0.00"
-                  value={this.state.requiredAmount}
-                  onChangeText={(text) => this.setState({ requiredAmount: text })}
-                />
-                <Text style={styles.subtitle}>Patient’s Current Situation</Text>
-                <View style={styles.checkboxContainer}>
-                  <CheckBox
-                    style={styles.checkbox}
-                    onClick={() => {
-                      this.setState({
-                        admitted: !this.state.admitted
-                      })
-                    }}
-                    isChecked={this.state.admitted}
-                  />
-                  <Text style={styles.checkboxText1}>Admitted</Text>
-                </View>
-                <View style={styles.checkboxContainer}>
-                  <CheckBox
-                    style={styles.checkbox}
-                    onClick={() => {
-                      this.setState({
-                        notAdmitted: !this.state.notAdmitted
-                      })
-                    }}
-                    isChecked={this.state.notAdmitted}
-                  />
-                  <Text style={styles.checkboxText2}>Not Admitted</Text>
-                </View>
-                <View style={styles.checkboxContainer}>
-                  <CheckBox
-                    style={styles.checkbox}
-                    onClick={() => {
-                      this.setState({
-                        underHomeTreatment: !this.state.underHomeTreatment
-                      })
-                    }}
-                    isChecked={this.state.underHomeTreatment}
-                  />
-                  <Text style={styles.checkboxText3}>Under Home Treatment</Text>
-                </View>
-              </View>
-            </ProgressStep>
+  label="3"
+  onNext={this.onNextStep}
+  scrollViewProps={this.defaultScrollViewProps}
+  nextBtnTextStyle={styles.buttonText}
+  nextBtnStyle={styles.button}
+>
+  <View style={styles.stepContainer}>
+    <Text style={styles.stepTitle}>Treatment Details</Text>
+    <Text style={styles.subtitle}>Enter Disease Name</Text>
+    <TextInput
+      style={styles.input}
+      placeholder="Disease name here"
+      value={this.state.diseaseName}
+      onChangeText={(text) => this.setState({ diseaseName: text })}
+    />
+    <Text style={styles.subtitle}>Enter Required Amount</Text>
+    <TextInput
+      style={styles.input}
+      placeholder="Rs.0.00"
+      value={this.state.requiredAmount}
+      keyboardType="numeric" // Show numeric keyboard
+      onChangeText={(text) => {
+        this.setState({ requiredAmount: text });
+      }}
+    />
+    <Text style={styles.subtitle}>Patient’s Current Situation</Text>
+    <View style={styles.checkboxContainer}>
+      <CheckBox
+        style={styles.checkbox}
+        onClick={() => {
+          this.setState({
+            admitted: !this.state.admitted
+          });
+        }}
+        isChecked={this.state.admitted}
+      />
+      <Text style={styles.checkboxText1}>Admitted</Text>
+    </View>
+    <View style={styles.checkboxContainer}>
+      <CheckBox
+        style={styles.checkbox}
+        onClick={() => {
+          this.setState({
+            notAdmitted: !this.state.notAdmitted
+          });
+        }}
+        isChecked={this.state.notAdmitted}
+      />
+      <Text style={styles.checkboxText2}>Not Admitted</Text>
+    </View>
+    <View style={styles.checkboxContainer}>
+      <CheckBox
+        style={styles.checkbox}
+        onClick={() => {
+          this.setState({
+            underHomeTreatment: !this.state.underHomeTreatment
+          });
+        }}
+        isChecked={this.state.underHomeTreatment}
+      />
+      <Text style={styles.checkboxText3}>Under Home Treatment</Text>
+    </View>
+  </View>
+</ProgressStep>
+
             <ProgressStep
               label="4"
               onSubmit={this.onSubmitSteps}

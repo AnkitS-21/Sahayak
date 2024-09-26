@@ -16,6 +16,7 @@ import Withdraw from "./Screens/Withdraw";
 import CampaignThankYou from "./Screens/CampaignThankYou";
 import CampaignMain from "./Screens/CampaignMain";
 import Notification from "./Screens/Notification";
+import CampaignList from "./Screens/CampaignList";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,7 @@ export const AboutStack = () => {
       <Stack.Screen name="CampaignThankYou" component={CampaignThankYou} options={{headerShown: false}}/>
       <Stack.Screen name="CampaignMain" component={CampaignMain} options={{headerShown: false}}/>
       <Stack.Screen name="Notification" component={Notification} options={{headerShown: false}}/>
+      <Stack.Screen name="CampaignList" component={CampaignList} options={{headerShown: false}}/>
       
     </Stack.Navigator>
   );

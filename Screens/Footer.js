@@ -13,7 +13,7 @@ const Footer = () => {
         <Image source={require('../assets/HomeIcon.png')} style={styles.footerButtonIcon} />
         <Text style={styles.footerButtonText}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('CampaignMain', { userName, userEmail })}>
+      <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('CampaignList', { userName, userEmail })}>
         <Image source={require('../assets/Campaign.png')} style={styles.footerButtonIcon} />
         <Text style={styles.footerButtonText}>Campaign</Text>
       </TouchableOpacity>

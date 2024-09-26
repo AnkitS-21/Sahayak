@@ -1,0 +1,218 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page</title>
+</head>
+<body>
+    <h1>Donation for: <span id="patientName"></span></h1>
+    <p>Fundraiser: <span id="yourName"></span></p>
+    <p>Disease: <span id="diseaseName"></span></p>
+    <p>Required Amount: ₹<span id="requiredAmount"></span></p>
+
+    <script>
+        // Function to get query parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                yourName: params.get('yourName'),
+                patientName: params.get('patientName'),
+                diseaseName: params.get('diseaseName'),
+                requiredAmount: params.get('requiredAmount')
+            };
+        }
+
+        // Populate the HTML with query parameters
+        const { yourName, patientName, diseaseName, requiredAmount } = getQueryParams();
+
+        document.getElementById('yourName').innerText = yourName || 'N/A';
+        document.getElementById('patientName').innerText = patientName || 'N/A';
+        document.getElementById('diseaseName').innerText = diseaseName || 'N/A';
+        document.getElementById('requiredAmount').innerText = requiredAmount || '0.00';
+    </script>
+</body>
+</html>
+
+ -->
+
+
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #003198;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .donation-box {
+            text-align: center;
+        }
+
+        .donation-box h2 {
+            color: #FF0000;
+        }
+
+        .raised-amount {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .progress {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 20px;
+            height: 10px;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #1BBF00;
+            border-radius: 20px;
+        }
+
+        .donate-now-btn {
+            background-color: #FF7F27;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .campaigner-details,
+        .beneficiary-details {
+            background-color: #EFF4FF;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .campaigner-details h3,
+        .beneficiary-details h3 {
+            font-size: 18px;
+            color: #003198;
+        }
+
+        .contact-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-icons img {
+            margin-left: 10px;
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+        }
+
+        .live-update {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .raised-amount {
+            font-size: 16px;
+            color: #686868;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="pageTitle">Help <span id="patientName"></span> Fight With <span id="diseaseName"></span></h1>
+
+    <div class="container donation-box">
+        <div class="live-update" id="liveUpdate">● Live Donation Update: Rs. <span id="raisedAmount"></span></div>
+        <h2>Rs. <span id="raisedAmount">0</span> Raised Of Rs. <span id="requiredAmount">0</span></h2>
+        <p>10 donors in 3 days</p>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <button class="donate-now-btn">Donate Now</button>
+    </div>
+
+    <div class="container campaigner-details">
+        <h3>Campaigner Details</h3>
+        <p id="yourName"></p>
+        <p id="campaignerLocation">Location: <span id="location"></span></p>
+        <div class="contact-icons">
+            <span>Contact Via:</span>
+            <img src="whatsapp.png" alt="WhatsApp" />
+            <img src="phone.png" alt="Phone" />
+            <img src="email.png" alt="Email" />
+        </div>
+    </div>
+
+    <div class="container beneficiary-details">
+        <h3>Beneficiary Details</h3>
+        <p id="beneficiaryName">Patient Name: <span id="patientName"></span></p>
+        <p>Hospitalized at <span id="hospital"></span></p>
+    </div>
+
+    <script>
+        // Function to get query parameters from URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                yourName: params.get('yourName'),
+                patientName: params.get('patientName'),
+                diseaseName: params.get('diseaseName'),
+                requiredAmount: params.get('requiredAmount'),
+                raisedAmount: params.get('raisedAmount') || 15000, // Example dynamic value
+                location: params.get('patientAddress') || "Mumbai, Maharashtra"
+            };
+        }
+
+        // Populate the HTML with dynamic values
+        const { yourName, patientName, diseaseName, requiredAmount, raisedAmount, location, hospital } = getQueryParams();
+
+        document.getElementById('yourName').innerText = yourName || 'N/A';
+        document.getElementById('patientName').innerText = patientName || 'N/A';
+        document.getElementById('diseaseName').innerText = diseaseName || 'N/A';
+        document.getElementById('requiredAmount').innerText = requiredAmount || '0.00';
+        document.getElementById('raisedAmount').innerText = raisedAmount;
+        document.getElementById('patientAddress').innerText = location;
+
+        // Update the title
+        document.getElementById('pageTitle').innerHTML = `Help ${patientName} Fight With ${diseaseName}`;
+
+        // Update the progress bar
+        const progressBar = document.getElementById('progressBar');
+        const progress = Math.min((raisedAmount / requiredAmount) * 100, 100); // Limit to 100%
+        progressBar.style.width = progress + '%';
+    </script>
+
+</body>
+
+</html>
